@@ -2,8 +2,8 @@
 import os, requests, datetime
 from pathlib import Path
 
-WEBHOOK_URL = os.environ["https://discord.com/api/webhooks/1409869968341729430/NSYdwW-INK4ueMS-XMzqiHuzyfxoLy2FqO6DIJb-XC77AWRsNuMDoe2PC1-IE7Lzsg5F"]
-QUOTES_FILE = Path("D:\Code\Github Repos\office-quote-discord-bot\quotes.txt")
+WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
+QUOTES_FILE = Path("quotes.txt")
 PREFIX = "📺 The Office — Daily quote:"
 MAX_LEN = 500
 
@@ -33,5 +33,5 @@ def main():
         content = f"{PREFIX}\n> {q}"
     post(content)
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
