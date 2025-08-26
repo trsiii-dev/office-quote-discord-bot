@@ -1,0 +1,28 @@
+name: Daily Office Quote
+
+on:
+  schedule:
+    # Runs at 15:00 UTC every day.
+    # GitHub uses UTC. 15:00 UTC = 9:00 in Denver during Daylight Time.
+    - cron: "0 15 * * *"
+  workflow_dispatch: {}  # lets you run it manually from the Actions tab
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Post quote to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python post_quote.py
